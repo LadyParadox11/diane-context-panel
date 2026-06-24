@@ -661,32 +661,25 @@
 
     cwSend.addEventListener('click', sendCowork);
     cwInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendCowork(); });
+    // --- theme detection (system dark mode) ---
+    // Detect browser/OS dark mode preference and apply data-theme attribute.
+    // This is more reliable than CSS media queries in iframes.
+    function applyTheme() {
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+      }
+    }
 
-    // --- theme detection (Missive light/dark mode) ---
-    // Watch for Missive's data-theme attribute changes and respond.
-    // Our CSS custom properties auto-update via Missive's stylesheet.
-    const themeObserver = new MutationObserver((mutations) => {
-      mutations.forEach(m => {
-        if (m.attributeName === 'data-theme') {
-          const theme = document.documentElement.getAttribute('data-theme');
-          // CSS variables update automatically (Missive stylesheet handles it)
-          // Uncomment below if you need to trigger JS-side theme logic:
-          // console.log(`Theme changed to: ${theme}`);
-        }
-      });
-    });
-    themeObserver.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['data-theme']
-    });
+    // Apply theme on load
+    applyTheme();
 
-    // Also detect system preference (if Missive hasn't set data-theme yet)
+    // Listen for system theme changes
     if (window.matchMedia) {
       const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
-      darkModeQuery.addListener(() => {
-        // Refresh if system theme changes and Missive theme isn't set
-        if (!document.documentElement.getAttribute('data-theme')) {
-          // Panel already responds via CSS media query, no action needed
+      darkModeQuery.addEventListener('change', applyTheme);
+    }
         }
       });
     }
