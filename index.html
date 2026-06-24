@@ -15,13 +15,13 @@
        Fallbacks ensure the panel works if Missive stylesheet hasn't loaded yet.
        ===================================================================== */
     :root {
-      /* Colors — inherit from Missive's variables */
-      --bg:            var(--missive-background-color, #f6f4ef);
-      --panel:         var(--missive-background-color, #ffffff);
-      --card:          var(--missive-background-color, #ffffff);
-      --card-border:   var(--missive-light-border-color, #ece7dd);
-      --ink:           var(--missive-text-color-a, #2e2a25);   /* primary text */
-      --ink-soft:      var(--missive-text-color-d, #847c70);   /* secondary text */
+      /* Colors — light mode (default) */
+      --bg:            #f6f4ef;
+      --panel:         #ffffff;
+      --card:          #ffffff;
+      --card-border:   #ece7dd;
+      --ink:           #2e2a25;   /* primary text */
+      --ink-soft:      #847c70;   /* secondary text */
 
       /* Accent — warm orange (cohesive with Diane's aesthetic, not Missive blue) */
       --accent:        #b3683f;   /* warm highlight — Diane's color */
@@ -45,6 +45,22 @@
       --title-size:    15px;      /* card headlines */
     }
 
+    /* Dark mode — respects user's system/browser preference */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg:            #1a1a1a;
+        --panel:         #262626;
+        --card:          #323232;
+        --card-border:   #404040;
+        --ink:           #f5f5f5;
+        --ink-soft:      #b0b0b0;
+        --note-bg:       #3a3a3a;
+        --cowork-bg:     #3a3a3a;
+        --cowork-ink:    #f5f5f5;
+        --cowork-reply:  #454545;
+        --accent-soft:   #4a3a32;   /* darker wash of accent for dark mode */
+      }
+    }
     /* ---- frame ---- */
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
