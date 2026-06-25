@@ -410,4 +410,4 @@ const MOCK_SCENARIOS = {
 // MOCK_SCENARIOS.rich, MOCK_SCENARIOS.sparse, MOCK_SCENARIOS.complete,
 // MOCK_SCENARIOS.heavyScroll, MOCK_SCENARIOS.internalTeam,
 // MOCK_SCENARIOS.meetingHeavy, MOCK_SCENARIOS.vendorMinimal, MOCK_SCENARIOS.documentHeavy
-const MOCK = MOCK_SCENARIOS.sparse;
+const MOCK = MOCK_SCENARIOS.rich;
